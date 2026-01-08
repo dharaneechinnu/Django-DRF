@@ -7,17 +7,14 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from products.serializers import ProductSerializer
 
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
 def api_view(request):
 
-    if request.method == 'GET':
-        instance=product.objects.all().order_by("?").first()
-        data={}
-        if instance:
-            # data=model_to_dict(model_data)
-            data=ProductSerializer(instance).data
-        return Response(data)
-    else:
-        return Response({"message": "Hey Whatapp!"},status=200)
+    serializer=ProductSerializer(data=request.data,many=True)
+    if serializer.is_valid(raise_exception=True):
+        # serializer.save()
+        return Response(serializer.data)
+ 
+    return Response({"data":"No products available"})       
     
    
