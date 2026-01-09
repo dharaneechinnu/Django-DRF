@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import generics
-from rest_framework import mixins
+from rest_framework import mixins,permissions,authentication
 from . models import product
 from .serializers import ProductSerializer
+from .permissions import IsStaffEditorPermission
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
  
@@ -13,7 +14,8 @@ class ProductDetailsApiView(generics.RetrieveAPIView):
 class Createproductapiview(generics.ListCreateAPIView):
     queryset = product.objects.all()
     serializer_class = ProductSerializer
-
+    authentication_classes = [authentication.SessionAuthentication]
+    permission_classes = [permissions.IsAuthenticated, IsStaffEditorPermission]
     
     def perform_create(self, serializer):
 
@@ -52,6 +54,8 @@ class ProductmixinsView(mixins.ListModelMixin,
     queryset = product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'
+    authentication_classes = [authentication.SessionAuthentication]
+    permission_classes = [IsStaffEditorPermission]
 
 
     def get(self, request, *args, **kwargs):
