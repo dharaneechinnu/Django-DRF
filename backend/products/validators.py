@@ -1,0 +1,11 @@
+from rest_framework import serializers
+from .models import Product
+from rest_framework.validators import UniqueValidator
+
+def validate_title_no_hello(value):
+    if "hello" in value.lower():
+        raise serializers.ValidationError("Product title cannot contain 'hello'.")
+    return value
+
+unique_product_title_validator = UniqueValidator(
+    queryset=Product.objects.all(),lookup='iexact')

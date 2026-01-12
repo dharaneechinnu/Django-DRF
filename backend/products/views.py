@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework import mixins
 from . models import Product
 from .serializers import ProductSerializer
-from api.mixins import IsStaffEditorPermissionMixins
+from api.mixins import IsStaffEditorPermissionMixins, UserQuerySetMixins
 
 from api.permissions import IsStaffEditorPermission
 
@@ -13,11 +13,10 @@ class ProductDetailsApiView(IsStaffEditorPermissionMixins,generics.RetrieveAPIVi
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
-class Createproductapiview(generics.ListCreateAPIView):
+class Createproductapiview(UserQuerySetMixins, generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.IsAdminUser, IsStaffEditorPermission]
-  
+    allow_staff_view = False
     def perform_create(self, serializer):
 
         title = serializer.validated_data.get('title')
@@ -25,10 +24,14 @@ class Createproductapiview(generics.ListCreateAPIView):
 
         if description is None:
             description = title
-        serializer.save(description=description)
+        serializer.save(description=description,user=self.request.user)
+    
+    # def get_queryset(self):
+    #     qs=self.request.user
+    #     return super().get_queryset().filter(user=qs)
 
 
-class Updateproductapiview(IsStaffEditorPermissionMixins,generics.UpdateAPIView):
+class Updateproductapiview(generics.RetrieveUpdateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_field = 'pk'
