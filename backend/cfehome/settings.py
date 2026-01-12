@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import datetime
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'algoliasearch_django',
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt',
     'article',
     'api',
     'products',
@@ -127,6 +129,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
         'api.authentication.TokenAuthentication',
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -135,4 +138,10 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
-ALGOLIA = {"APPLICATION_ID": "6SELZVGBTD", "API_KEY": "8a7489cdb674d28d84573670dca0fa7d", "INDEX_PREFIX": "cfehome_django_Product"}
+ALGOLIA = {"APPLICATION_ID": "6SELZVGBTD", "API_KEY": "8a7489cdb674d28d84573670dca0fa7d", "INDEX_PREFIX": "cfe"}
+
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": ["Bearer"],
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(seconds=30), # minutes=5
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(minutes=1), # days=1
+}
