@@ -1,8 +1,9 @@
+from random import random
 from django.db import models
 from django.conf import settings
 from django.db.models import Q
 User = settings.AUTH_USER_MODEL
-
+TAGS_MODEL_VALUES = ['electronics', 'cars', 'boats', 'movies', 'cameras']
 
 class ProudctQuerySet(models.QuerySet):
 
@@ -42,6 +43,10 @@ class Product(models.Model):
     objects = ProductManager()
 
     @property
+
+    def get_tags_list(self):
+        return [random.choice(TAGS_MODEL_VALUES)]
+
     def sale_price(self):
         return "%.2f" % (float(self.price) * 0.8)
     
