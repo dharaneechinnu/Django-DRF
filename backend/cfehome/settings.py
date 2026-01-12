@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'algoliasearch_django',
     'rest_framework',
     'rest_framework.authtoken',
-
+    'article',
     'api',
     'products',
     'search',
@@ -135,4 +135,4 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
 }
 
-ALGOLIA = {"APPLICATION_ID": "6SELZVGBTD", "API_KEY": "005e5331ac96c95ca2c1ed833541661b", "INDEX_PREFIX": "cfehome_django"}
+ALGOLIA = {"APPLICATION_ID": "6SELZVGBTD", "API_KEY": "8a7489cdb674d28d84573670dca0fa7d", "INDEX_PREFIX": "cfehome_django_Product"}

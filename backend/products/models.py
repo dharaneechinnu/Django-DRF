@@ -41,9 +41,12 @@ class Product(models.Model):
     public = models.BooleanField(default=True)
 
     objects = ProductManager()
-
+   
     @property
-
+    def endpoint(self):
+        return f"/api/products/{self.pk}/"
+    def path(self):
+        return f"/products/{self.pk}/"
     def get_tags_list(self):
         return [random.choice(TAGS_MODEL_VALUES)]
 

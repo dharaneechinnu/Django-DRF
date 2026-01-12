@@ -2,7 +2,6 @@ from algoliasearch_django import algolia_engine
 from django.conf import settings
 
 
-
 def perform_Search(query, **kwargs):
     try:
         if not query:
