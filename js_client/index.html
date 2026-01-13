@@ -1,17 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-        <form id="login-form">
-            <input type="text" name="username" id="username" placeholder="Username" required>
-            <input type="password" name="password" id="password" placeholder="Password" required>
-            <button type="submit">Login</button>
-
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>JS Client</title>
+    </head>
+    <body>
+        <form id="login-form" method="POST">
+            <input type="text" name="username" placeholder="Your Username" />
+            <input type="password" name="password", placeholder="Your Password">
+            <input type="submit" value="Login" />
         </form>
+
+        <form  id="search-form" method="GET">
+            <input type="text" name="q" placeholder="Your search" />
+            <input type="submit" value="search" />
+        </form>
+
+        <div id="content-container"></div>
+
+
+        <div id="searchbox"></div>
+        <div id="clear-refinements"></div>
+        <div id="user-list"></div>
+        <div><h3>Public</h3>
+       
+
         <script src="./client.js"></script>
-</body>
+
+    </body>
 </html>

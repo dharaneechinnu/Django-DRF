@@ -150,6 +150,6 @@ ALGOLIA = {"APPLICATION_ID": "6SELZVGBTD", "API_KEY": "8a7489cdb674d28d84573670d
 
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ["Bearer"],
-    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(seconds=30), # minutes=5
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(minutes=60), # minutes=60
     "REFRESH_TOKEN_LIFETIME": datetime.timedelta(minutes=1), # days=1
 }

@@ -29,4 +29,5 @@ class SearchListView(generics.ListAPIView):
         if self.request.user.is_authenticated:
             user=self.request.user
         result = qs.search(query,user=user)
+        print("SearchListView result:", result)
         return result

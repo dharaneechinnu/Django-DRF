@@ -13,12 +13,12 @@ class ProductSerializer(serializers.ModelSerializer):
         lookup_field='pk'
     )
     edit_url = serializers.SerializerMethodField(read_only=True)
-    #email = serializers.EmailField(write_only=True)
+    email = serializers.EmailField(write_only=True)
     title= serializers.CharField(validators=[validators.validate_title_no_hello,validators.unique_product_title_validator])
     class Meta:
         model = Product
         # fields = ['title','description','price','get_discount','sale_price']
-        fields = ['Owner','edit_url', 'url', 'pk', 'title', 'description', 'price', 'sale_price','path','endpoint']
+        fields = ['Owner','edit_url','email', 'url', 'pk', 'title', 'description', 'price', 'sale_price','path','endpoint']
 
     def create(self, validated_data):
         email = validated_data.pop('email')
